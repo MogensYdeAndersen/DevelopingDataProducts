@@ -1,0 +1,89 @@
+---
+title: "Prompt for data products assignment sept.2015"
+author: "Mogens Yde-Andersen"
+date: "27. sep. 2015"
+output:
+  html_document:
+    theme: united
+    toc: yes
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
+```
+
+### Do famous (american) actresses have a age dilemma? The answer is still blowing in the wind
+
+In the assignment for the Data Products class at the John Hopkins Bloomberg School of Public Health and Coursera, I wanted to find out whether female movie stars in America "suffer" from the movie industry's ideals about ideal actresses. Is there a age-related backside of the movie star medal that male actors do not have to worry about? Or has the gender equality reached the shores of the american film industry's production today?
+
+The inspiration to pose this question came from the IMDB.com website that contains numerous lists about movies, actors, directors and so on.
+
+### Data sources and the consequential non-reproducibility
+
+I thought that I could almost all of the needed data to form the data set that could answer the question posed above.
+
+...but i could not. IMDB has a lot of data, but the accesability is not "googlelish." So IMDB became the inspirational start point, but i had to supply my data set with a lot of google search, where i mainly picked the information about the actors from the right side of the returning search result page. Thar is where the Google Knowledge Graph data is placed.
+
+This means that the data set is not easily reproducible, unless You master some tricks that a beginner as me do not.
+
+### Understanding the shiny app data set
+
+The data set contains of 23 columns and 730 rows.
+
+Column name - content - use - important notes about limited use and interpretability:
+
+<li>1.actor - name of actor</li>
+<li>2.sex - female or male</li>
+<li>3.movies - number of movies that the actor has played a role in</li>
+<li>4.actorProductivity - segmentation of actors in beginner, low, middle and upper segment in relation to number of film roles</li>
+<li>5.topMovie - the movie that the actor participated in and that has generated the greatest gross revenues</li>
+<li>6.topMovieRevenue - the top movie generated gross revennue</li>
+<li>7.totalRevenue - the total of all gross revenues from the movies that the actor participated in</li> 
+<li>8.avRevenue - the average gross revenue across all the movies that the actor participated in</li></br>
+
+For the rest of the variable, only approx. 60 rows are filled with data.The remaining 670 rows are filled with temporary information or danish notes. It is my plan as fast as possible to harvest the missing data and complete the data set.
+
+<li>9.birthday - actor's birthday</li>
+<li>10.launchdateTopMovie - the day that the top movie was released</li>
+<li>11.comingMovie - The first movie to be released in the nearest future that has been announced and that the actor will be playing a role in, if any</li>
+<li>12.dateComingMovie - The release date of the first coming movie connected with the actor, if any</li>
+<li>13.Height - physical height of the actor</li>
+<li>14.bornInCity - birth place/city of the actor</li>
+<li>15.bornInCountry - birth state and country of the actor</li>
+<li>16.MarrialStatus - the current civil status of the actor</li>
+<li>17.Children - number of the actor's children</li>
+<li>18.Dead - date of death or status alive</li>
+<li>19.comingEvents - notification about other announced events in the Google serach results - very incomplete variable</li>
+<li>20.comingMovie2 - The secound movie to be released in the future that has been announced and that the actor will be playing a role in, if any</li>
+<li>21.dateComingMovie2 - The release date of the second coming movie connected with the actor, if any</li>
+<li>22.comingMovie3 - The secound movie to be released in the future that has been announced and that the actor will be playing a role in, if any</li>
+<li>23.dateComingMovie3 - The release date of the second coming movie connected with the actor, if any</li>
+</li>
+###Findings
+
+First of all the data set contains 38% actresses and 62% actors.
+
+A. Movies with new beginning actresses generate on average more top revenues than with male actors. Actresses in 3-15 movies generate less top movie revenues - as well as on average. Here teh male actors run from the actresses. The ever green actresses can compete with the ever green actors.
+
+B. The movies with the beginner actresses seem to cash more in. The evergreen male actors run from the evergreen actresses, when it comes the total generates gross revenue of all their films.
+
+C. The attractivity of the beginner actresses is significant, where as the more routined male actors outbeat the actressed with higher average revenues and higher total revenues of their movies.
+
+Use full sample size all the time, when reproducing the analysis.
+
+<li>A. Variable combination: X="topMovieRevenue", Y="avRevenue", Color="actorProductivity", (Smooth)="On", Facet Column="sex".</li>
+<li>B. Variable combination: X="movies", Y="totalRevenue", Color="actorProductivity", (Smooth)="On", Facet Column="sex".</li>
+<li>C. Variable combination: X="avRevenue", Y="totalRevenue", Color="actorProductivity", (Smooth)="On", Facet Column="sex".</li>
+
+###Interpretation
+
+There seems to be a pattern about better revenues of movies with new beginning actresses, but male actors seem to take over in the next phases of their film careers.
+
+But there is a big "aberdabei. And that is that gross revenues from movies do not prove a 100% connection with actors' and actresses salaries. It can only be an indication.
+
+More data mining must be conducted with more appropriate data sets.
+
+###Entertainment
+
+...but the appMoviestar4 is education and entertainment...at least to a smaller extent. Enjoy!
+

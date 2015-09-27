@@ -1,0 +1,180 @@
+---
+title: "American Actors and their affiliation with movie revenue generation"
+author: "Mogens Yde-Andersen"
+date: "20. sep. 2015"
+output:
+  html_document:
+    theme: united
+    toc: yes
+  md_document:
+    toc: yes
+  word_document: default
+---
+###Gross revenues for US actors
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
+```
+
+2 Load processed data publicized from IMDB website
+```{r 2, echo=FALSE, cache=TRUE}
+library(devtools)
+library(ggplot2)
+actors <- read.csv("data/IMDBactors4D.csv", header=TRUE, sep=";")
+```
+
+2AA Load processed data publicized from IMDB website
+#```{r 2AA, echo=FALSE, cache=TRUE}
+#
+# summary(actors)
+# str(actors)
+# head(actors,15)
+# tail(actors,15)
+# ```
+
+2A
+```{r 2A, echo=FALSE, cache=TRUE}
+ actors$movies <- as.numeric(as.character(actors$movies))
+```
+ 
+2B
+```{r 2B, echo=FALSE, cache=TRUE}
+actors$totalRevenue <- as.numeric(as.character(actors$totalRevenue))
+```
+
+2C
+```{r 2C, echo=FALSE, cache=TRUE}
+actors$avRevenue <- as.numeric(as.character(actors$avRevenue))
+```
+
+2D
+```{r 2D, echo=FALSE, cache=TRUE}
+actors$topMovieRevenue <- as.numeric(as.character(actors$topMovieRevenue))
+```
+ 
+#2E
+# ```{r 2E, echo=FALSE, cache=TRUE}
+# actors$no1Mov <- actors$number1Movie
+# ```
+# 
+# 2E2
+# ```{r 2E2, echo=FALSE, cache=TRUE}
+# actors <- actors[,c(1,5,7:11)]
+# ```
+
+2K
+```{r 2K, echo=FALSE, cache=TRUE}
+summary(actors)
+str(actors)
+head(actors,15)
+tail(actors,15)
+```
+
+Dimensions
+```{r 3 dim, echo=FALSE, cache=TRUE}
+dim(actors)
+```
+3 Structure and overviewe of data set
+```{r 3, echo=FALSE, cache=TRUE}
+str(actors)
+summary(actors)
+```
+4 Head and tail of variables
+```{r 4, echo=FALSE, cache=TRUE}
+head(actors$actor)
+tail(actors$actor)
+head(actors$totalRevenue)
+tail(actors$totalRevenue)
+head(actors$movies)
+tail(actors$movies)
+head(actors$avRevenue)
+tail(actors$avRevenue)
+head(actors$topMovie)
+tail(actors$topMovie)
+head(actors$topMovieRevenue)
+tail(actors$topMovieRevenue)
+
+table(actors$totalRevenue)
+table(actors$movies)
+table(actors$avRevenue)
+table(actors$topMovieRevenue)
+```
+
+5 Histograms of GrossRevenue variables
+```{r 5, echo=FALSE, cache=TRUE}
+hist(actors$totalRevenue,breaks = 30, col.bars = actors$sex)
+```
+
+5A
+```{r 5A, echo=FALSE, cache=TRUE}
+hist(actors$movies,breaks = 74)
+```
+
+5B
+```{r 5B, echo=FALSE, cache=TRUE}
+hist(actors$avRevenue,breaks=11)
+```
+
+5C
+##```{r 5C, echo=FALSE, cache=TRUE}
+##hist(actors$topMovieRevenue,breaks=11)
+##```
+
+6 Exploratory plot
+```{r 6, echo=FALSE, cache=TRUE}
+plot(actors)
+```
+
+7A Total Gross Revenue per actor by number of movies and by sex
+```{r 7A, echo=FALSE, cache=TRUE}
+library(ggplot2)
+f <- ggplot(actors, aes(x=movies,y=totalRevenue, colour = sex))
+f <- f + geom_hline(yintercept = 1000,size=1,col="deepskyblue")
+f <- f + geom_vline(xintercept = 18.58,size=1,col="deepskyblue")
+f <- f + geom_point(size = 2)
+f
+```
+
+7 Total Gross Revenue per actor by number of movies
+```{r 7, echo=FALSE, cache=TRUE}
+g <- ggplot(actors, aes(x = movies,y = totalRevenue))
+g <- g + geom_hline(yintercept = 358,size=1,col="deepskyblue")
+g <- g + geom_vline(xintercept = 18.58,size=1,col="deepskyblue")
+g <- g + geom_point(aes(color = movies),size = 2) 
+g <- g + labs(x = "Number of movies per actor", y = "Actor's total gross revenue",title="Total Gross Revenue per actor by number of movies")
+g
+```
+
+8 Average Gross Revenue per movie for actor by number of movies
+```{r 8, echo=FALSE, cache=TRUE}
+h <- ggplot(actors, aes(x = movies,y = actors$avRevenue))
+h <- h + geom_hline(yintercept = 251,size=1,col="deepskyblue")
+h <- h + geom_vline(xintercept = 18.58, size=1,col="deepskyblue")
+h <- h + geom_point(aes(color = movies),size = 1) 
+h <- h + labs(x = "Number of movies per actor", y = "Actor's total gross revenue",title="Average Gross Revenue per movie for actor by number of movies")
+h
+```
+
+9 Top 25 movie cash cows
+```{r 9, echo=FALSE, cache=TRUE}
+library(plyr)
+actorstopmovies <- actors[with(actors, order(-topMovieRevenue, -avRevenue)),]
+dim(actorstopmovies)
+colnames(actorstopmovies)
+head(actorstopmovies, 25)
+```
+
+10 Bottom 25 IMDB #1 movies
+```{r 10, echo=FALSE, cache=TRUE}
+tail(actorstopmovies, 25)
+```
+
+11 Table Top 25 actor cash cows
+```{r 11, echo=FALSE, cache=TRUE}
+topactors <- actors[with(actors, order(-totalRevenue, -avRevenue)),]
+head(topactors, 25)
+```
+
+12 Table Bottom 25 actor cash cows
+```{r 12, echo=FALSE, cache=TRUE}
+tail(topactors, 25)
+```

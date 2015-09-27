@@ -1,0 +1,19 @@
+---
+title: "Prompt for data products assignment sept.2015"
+author: "Mogens Yde-Andersen"
+date: "27. sep. 2015"
+output:
+  html_document:
+    theme: united
+    toc: yes
+---
+
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE)
+```
+
+## Do famous (american) actresses have a age dilemma?
+
+In the assignment for the Data Products class at the John Hopkins Bloomberg School of Public Health and Coursera, I wanted to find out whether female movie stars in America "suffer" from the movie industry's ideals about ideal actresses. Is there a age-related backside of the movie star medal that male actors do not have to worry about? Or has the gender equality reached the shores of the american film industry's production today?
+
+The inspiration to pose this question came from the IMDB.com website that contains numerous lists about movies, actors, directors and so on.
